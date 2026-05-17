@@ -26,14 +26,14 @@
   </url>
 
   <url>
-    <loc>https://www.mariecure.be/behandelingen.html</loc>
+    <loc>https://www.mariecure.be/behandelingen</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://www.mariecure.be/fotos.html</loc>
+    <loc>https://www.mariecure.be/fotos</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
@@ -48,7 +48,7 @@
   </url>
 
   <url>
-    <loc>https://www.mariecure.be/contact.html</loc>
+    <loc>https://www.mariecure.be/contact</loc>
     <lastmod>2026-05-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.7</priority>

@@ -2,10 +2,14 @@
 // 1) mobile nav toggle  2) scroll-reveal  3) lightbox (foto's page)
 
 (function () {
-  // Mark current nav link
-  const path = location.pathname.split('/').pop() || 'index.html';
+  // Mark current nav link (works for both /behandelingen and /behandelingen.html)
+  const normalize = (p) => {
+    const last = (p.split('/').pop() || '').replace(/\.html$/, '');
+    return last === '' ? 'index' : last;
+  };
+  const currentRoute = normalize(location.pathname);
   document.querySelectorAll('.topnav nav a[data-route]').forEach((a) => {
-    if (a.dataset.route === path) a.setAttribute('aria-current', 'page');
+    if (normalize(a.dataset.route) === currentRoute) a.setAttribute('aria-current', 'page');
   });
 
   // Mobile menu
