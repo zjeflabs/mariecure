@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://www.mariecure.be/</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://www.mariecure.be/assets/img/hero-nails-zacht.webp</image:loc>
+      <image:caption>Verzorgde nagels in zachte oranje tinten met fijne nailart</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mariecure.be/assets/img/salon-rood-pastel.webp</image:loc>
+      <image:caption>Sets met rode en pastel kleuren met hartjes-nailart</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mariecure.be/assets/img/salon-bordeaux-goud.webp</image:loc>
+      <image:caption>Donkere bordeaux nagels met fijne goudaccent</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.mariecure.be/assets/img/salon-recent.webp</image:loc>
+      <image:caption>Recent werk uit nagelstudio Mariecure</image:caption>
+    </image:image>
+  </url>
+
+  <url>
+    <loc>https://www.mariecure.be/behandelingen.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://www.mariecure.be/fotos.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/nails-set-vierkant.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/nails-natuurlijk-vierkant.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/nails-portret-1.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/nails-portret-2.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/nails-kleurrijk-2025-02.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/instagram-post-natuurlijk.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/instagram-post-1.webp</image:loc></image:image>
+    <image:image><image:loc>https://www.mariecure.be/assets/img/instagram-post-zoe.webp</image:loc></image:image>
+  </url>
+
+  <url>
+    <loc>https://www.mariecure.be/contact.html</loc>
+    <lastmod>2026-05-17</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+</urlset>

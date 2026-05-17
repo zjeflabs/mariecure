@@ -1,0 +1,8 @@
+# robots.txt voor mariecure.be
+# Sta alle nette crawlers toe. Geen geheime paden, geen admin.
+
+User-agent: *
+Allow: /
+
+# Verwijs naar de sitemap zodat zoekmachines alle pagina's vinden.
+Sitemap: https://www.mariecure.be/sitemap.xml
