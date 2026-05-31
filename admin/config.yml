@@ -4,10 +4,13 @@ backend:
   name: github
   repo: zjeflabs/mariecure
   branch: main
-  # Aanmelden gaat via een wachtwoordpagina op dit domein (/api/auth, een Vercel
-  # serverless function). Die geeft het CMS een repo-token terug. Zo heeft Marieke
-  # geen eigen GitHub-account nodig — enkel het master-wachtwoord.
-  base_url: https://www.mariecure.be/api
+  # base_url (de inlog-/wachtwoordpagina op /api) wordt dynamisch gezet in
+  # admin/index.html, zodat hij meegaat met het huidige domein
+  # (Vercel-URL nu, www.mariecure.be later).
+  #
+  # Toon enkel de "Sign In with GitHub"-knop (= onze wachtwoordpagina),
+  # verberg de "Sign In Using Access Token"-knop om verwarring te vermijden.
+  auth_methods: [oauth]
 
 # Nieuwe foto's worden hier geupload; bestaande foto's blijven in /assets/img.
 media_folder: assets/img/gallery

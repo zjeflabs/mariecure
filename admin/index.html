@@ -7,6 +7,22 @@
     <title>Mariecure — Beheer</title>
   </head>
   <body>
+    <script>
+      // Voorkom automatische start zodat we de config nog kunnen aanvullen.
+      window.CMS_MANUAL_INIT = true;
+    </script>
     <script src="https://unpkg.com/@sveltia/cms/dist/sveltia-cms.js"></script>
+    <script>
+      // base_url volgt automatisch het huidige domein. Zo opent de inlogknop
+      // de juiste wachtwoordpagina, zowel op de Vercel-URL nu als op
+      // www.mariecure.be later — zonder de config aan te passen.
+      CMS.init({
+        config: {
+          backend: {
+            base_url: window.location.origin + '/api',
+          },
+        },
+      });
+    </script>
   </body>
 </html>
