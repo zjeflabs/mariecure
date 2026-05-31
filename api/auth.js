@@ -10,8 +10,10 @@
 const crypto = require('crypto');
 
 module.exports = async (req, res) => {
-  const password = process.env.CMS_PASSWORD;
-  const token = process.env.CMS_GITHUB_TOKEN;
+  // .trim() vangt een per ongeluk meegekopieerde spatie of newline in de
+  // Vercel-waarde op (de meest voorkomende reden waarom het wachtwoord "fout" is).
+  const password = (process.env.CMS_PASSWORD || '').trim();
+  const token = (process.env.CMS_GITHUB_TOKEN || '').trim();
 
   const html = (status, body) => {
     res.statusCode = status;
@@ -26,7 +28,7 @@ module.exports = async (req, res) => {
   }
 
   if (req.method === 'POST') {
-    const given = readPassword(req);
+    const given = readPassword(req).trim();
     if (safeEqual(given, password)) {
       html(200, successPage(token));
       return;
@@ -43,6 +45,7 @@ module.exports = async (req, res) => {
 function readPassword(req) {
   const b = req.body;
   if (!b) return '';
+  if (Buffer.isBuffer(b)) return new URLSearchParams(b.toString('utf8')).get('password') || '';
   if (typeof b === 'string') return new URLSearchParams(b).get('password') || '';
   return b.password || '';
 }
@@ -91,7 +94,7 @@ function loginShell(notice) {
       <p class="sub">Vul het wachtwoord in om foto's te beheren.</p>
       ${notice}
       <label for="password">Wachtwoord</label>
-      <input id="password" type="password" name="password" autofocus required autocomplete="current-password" />
+      <input id="password" type="password" name="password" autofocus required autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" />
       <button type="submit">Inloggen</button>
     </form>
   </body>
