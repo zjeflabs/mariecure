@@ -335,11 +335,14 @@ h3 { font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -0.005em; font-w
 @media (max-width: 520px) { .photo-grid-3 { grid-template-columns: 1fr; } }
 
 /* --- reviews (home) ------------------------------------------------ */
+/* Flex i.p.v. grid zodat een oneven aantal reviews (bv. 5) netjes uitkomt:
+   de laatste rij wordt gecentreerd in plaats van een leeg vak te tonen. */
 .reviews-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 20px;
 }
 .review-card {
   margin: 0;
+  flex: 1 1 280px; max-width: 380px;
   display: flex; flex-direction: column; gap: 14px;
   background: var(--white);
   border: 1px solid color-mix(in oklab, var(--accent) 22%, transparent);
@@ -349,7 +352,6 @@ h3 { font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -0.005em; font-w
 .review-card .stars { color: var(--accent); font-size: 16px; letter-spacing: 3px; line-height: 1; }
 .review-card blockquote { margin: 0; font-size: 16.5px; line-height: 1.65; color: var(--fg); }
 .review-card figcaption { margin-top: auto; color: var(--accent); font-weight: 600; font-size: 14px; }
-@media (max-width: 860px) { .reviews-grid { grid-template-columns: 1fr; } }
 
 /* --- section heading (page titles + section labels) ---------------- */
 .section-title {
