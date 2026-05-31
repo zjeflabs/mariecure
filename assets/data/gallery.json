@@ -1,10 +1,32 @@
 {
   "photos": [
-    { "image": "/assets/img/nails-set-vierkant.webp", "alt": "Volledige set nagels in zachte tinten, gel-werk bij Mariecure Kalken" },
-    { "image": "/assets/img/nails-natuurlijk-vierkant.webp", "alt": "Natuurlijke nagels met biab-afwerking bij Mariecure Kalken" },
-    { "image": "/assets/img/nails-kleurrijk-2025-02.webp", "alt": "Kleurrijke nagels-set met meerdere tinten door Mariecure" },
-    { "image": "/assets/img/instagram-post-natuurlijk.webp", "alt": "Natuurlijke biab-nagels uit het salon" },
-    { "image": "/assets/img/instagram-post-1.webp", "alt": "Verzorgde nagels, recent werk bij Mariecure" },
-    { "image": "/assets/img/instagram-post-zoe.webp", "alt": "Gel-set met persoonlijke nailart, werk uit het salon" }
+    {
+      "image": "/assets/img/nails-set-vierkant.webp",
+      "alt": "Volledige set nagels in zachte tinten, gel-werk bij Mariecure Kalken"
+    },
+    {
+      "image": "/assets/img/nails-natuurlijk-vierkant.webp",
+      "alt": "Natuurlijke nagels met biab-afwerking bij Mariecure Kalken"
+    },
+    {
+      "image": "/assets/img/nails-kleurrijk-2025-02.webp",
+      "alt": "Kleurrijke nagels-set met meerdere tinten door Mariecure"
+    },
+    {
+      "image": "/assets/img/instagram-post-natuurlijk.webp",
+      "alt": "Natuurlijke biab-nagels uit het salon"
+    },
+    {
+      "image": "/assets/img/instagram-post-1.webp",
+      "alt": "Verzorgde nagels, recent werk bij Mariecure"
+    },
+    {
+      "image": "/assets/img/instagram-post-zoe.webp",
+      "alt": "Gel-set met persoonlijke nailart, werk uit het salon"
+    },
+    {
+      "image": "/assets/img/gallery/481324214_650212367547120_8221605405109978481_n-1.jpg",
+      "alt": ""
+    }
   ]
 }
