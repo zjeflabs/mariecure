@@ -3,6 +3,8 @@
 
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /api
 
 # Verwijs naar de sitemap zodat zoekmachines alle pagina's vinden.
 Sitemap: https://www.mariecure.be/sitemap.xml

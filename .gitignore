@@ -10,3 +10,12 @@ Thumbs.db
 # Open Design internal
 .od-skills/
 *.artifact.json
+
+# Secrets / lokale environment-variabelen — NOOIT committen
+# (CMS_PASSWORD en CMS_GITHUB_TOKEN horen enkel in Vercel thuis)
+.env
+.env.*
+!.env.example
+
+# Vercel CLI: 'vercel env pull' / 'vercel dev' schrijven hier secrets in
+.vercel
