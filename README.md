@@ -2,7 +2,7 @@
 
 Website voor **Mariecure**, een kleinschalige nagelstudio in Kalken (Laarne).
 
-Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen build-step, geen dependencies. Hosten kan op elke statische host (Netlify, Vercel, Cloudflare Pages, GitHub Pages, …).
+Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen build-step, geen npm-dependencies. De site draait op Vercel. De login van `/admin` is een serverless function (`api/auth.js`) en werkt alleen daar.
 
 ## Structuur
 
@@ -11,13 +11,19 @@ Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen build-step, geen 
 ├── index.html              Home
 ├── behandelingen.html      Behandelingen + prijzen
 ├── fotos.html              Galerij met lightbox
-├── contact.html            Contactinfo + Google Maps embed
+├── contact.html            Contactinfo + formulier
+├── admin/                  Sveltia CMS, foto's beheren op /admin
+│   ├── index.html
+│   └── config.yml
+├── api/
+│   └── auth.js             Wachtwoord-login voor /admin (alleen op Vercel)
 ├── sitemap.xml
 ├── robots.txt
 └── assets/
     ├── site.css            Gedeelde styling (alle tokens, layout, components)
     ├── site.js             Gedeelde scripts (mobile nav, lightbox, fade-in, year)
-    └── img/                14 WebP-images (logo, favicon, hero, salon, galerij)
+    ├── data/gallery.json   Lijst van galerijfoto's
+    └── img/                Logo, hero, salon en galerij
 ```
 
 ## Design system
@@ -40,9 +46,48 @@ Geoptimaliseerd voor lokale zoekopdrachten ("nagelstudio Kalken", "manicure Laar
 **Vóór live-gang nog te doen:**
 
 1. Domein invullen: search/replace `https://www.mariecure.be/` overal als je een ander domein gebruikt
-2. Echte social URLs (Instagram, Facebook) invullen in elke footer + in het `sameAs` array in `index.html` JSON-LD
-3. Geo-coördinaten verifiëren (nu `51.0639, 3.9344` als centrum Kalken)
-4. Google Search Console + Google Business Profile aanmaken
+2. Geo-coördinaten verifiëren (nu `51.0639, 3.9344` als centrum Kalken)
+3. Google Search Console + Google Business Profile aanmaken
+
+## Foto's wijzigen (`/admin`)
+
+De foto's op de pagina Foto's staan niet in de HTML. De pagina leest `assets/data/gallery.json`. Wijzigen doe je in het CMS, niet in de code.
+
+1. Open [https://www.mariecure.be/admin](https://www.mariecure.be/admin).
+2. Klik op **Sign in with GitHub**. Dat opent de wachtwoordpagina. Het is geen GitHub-login. Marieke heeft geen GitHub-account nodig.
+3. Vul het masterwachtwoord in. Dat is de Vercel-variabele `CMS_PASSWORD`. Het wachtwoord staat niet in deze repo.
+4. Open **Foto's (galerij)**.
+5. Voeg een foto toe, versleep de volgorde, of verwijder er een. Vul een korte omschrijving in. Die tekst is de alt-tekst.
+6. Publiceer. Dat maakt een commit op `main`. Vercel zet de site daarna live.
+
+De volgorde in het CMS is de volgorde op de site. De roze rand komt van de site. Die hoef je niet op de foto te zetten.
+
+Nieuwe uploads komen in `assets/img/gallery`. Oudere foto's blijven in `assets/img`.
+
+Lokaal (`python3 -m http.server`) zie je de galerij wel. De login werkt daar niet, want `api/auth.js` draait alleen op Vercel.
+
+Zegt de pagina dat het wachtwoord fout is, terwijl het klopt? Vaak staat er een spatie of een nieuwe regel achter de waarde in Vercel. Plak het wachtwoord opnieuw, zonder spatie, en doe een **Redeploy**. Een gewijzigde env-var geldt pas na een nieuwe deploy.
+
+## Deployen via Vercel
+
+De live site is [https://www.mariecure.be](https://www.mariecure.be). Vercel hangt aan de GitHub-repo `zjeflabs/mariecure`, branch `main`.
+
+Een push naar `main` start een deploy. Er is geen build-commando. Foto's publiceren vanuit `/admin` is ook een push naar `main`, dus dat deployt vanzelf.
+
+De repo is privé. De website blijft publiek.
+
+Deze twee variabelen staan alleen bij **Production** in Vercel. Zet ze nooit in git.
+
+| Naam               | Wat het is                                                                                                                        |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------------- |
+| `CMS_PASSWORD`     | Het wachtwoord voor `/admin`                                                                                                      |
+| `CMS_GITHUB_TOKEN` | Fine-grained GitHub-token. Resource owner: `zjeflabs`. Alleen de repo `mariecure`. Contents: Read and write. Metadata: Read-only. |
+
+Na het wijzigen van een variabele: **Deployments → Redeploy**. Vercel leest ze bij het starten van een deploy, niet live.
+
+Het token verloopt. Maak dan een nieuw token, vervang `CMS_GITHUB_TOKEN`, en redeploy. Daarna werkt het oude token niet meer.
+
+`/admin` en `/api` staan in `robots.txt` op Disallow, zodat zoekmachines ze niet indexeren.
 
 ## Browser-support
 
