@@ -12,6 +12,7 @@ Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen build-step, geen 
 ├── behandelingen.html      Behandelingen + prijzen
 ├── fotos.html              Galerij met lightbox
 ├── contact.html            Contactinfo + formulier
+├── bedankt.html            Bevestiging na het contactformulier (noindex)
 ├── admin/                  Sveltia CMS, foto's beheren op /admin
 │   ├── index.html
 │   └── config.yml

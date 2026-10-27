@@ -139,8 +139,10 @@
           headers: { Accept: 'application/json' },
         });
         if (res.ok) {
+          // reset() eerst: met de terugknop toont de browser anders het ingevulde formulier opnieuw.
           form.reset();
-          setStatus('Bedankt! Je bericht is verzonden. Ik neem snel contact met je op.', 'success');
+          window.location.href = '/bedankt';
+          return;
         } else {
           const data = await res.json().catch(() => null);
           const msg = data && Array.isArray(data.errors)
