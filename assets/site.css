@@ -1196,13 +1196,10 @@ h3 {
   color: #c0392b;
 }
 
-/* honeypot tegen spam */
+/* Honeypot tegen spam. display:none en niet offscreen: browser-autofill vult
+   offscreen velden wel in, waardoor Formspree echte berichten als spam ziet. */
 .hp {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+  display: none;
 }
 
 @media (max-width: 860px) {
