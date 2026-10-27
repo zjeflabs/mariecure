@@ -19,3 +19,6 @@ Thumbs.db
 
 # Netlify CLI: 'netlify link' / 'netlify dev' schrijven hier lokale state in
 .netlify
+
+# Build-output van netlify.toml
+dist/

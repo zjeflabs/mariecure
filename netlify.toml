@@ -1,16 +1,50 @@
-# Statische site zonder build-step: de repo-root is meteen de website.
+# Statische site zonder bundler. De build kopieert enkel de websitebestanden naar
+# dist/, zodat README.md, netlify.toml en de broncode in api/ niet online staan.
+# Een redirect volstaat daarvoor niet: Netlify serveerde api/auth.mjs ondanks
+# een geforceerde redirect. Nieuw bestand in de root? Voeg het hier toe.
 [build]
-  publish = "."
+  command = "rm -rf dist && mkdir dist && cp -R *.html favicon.ico robots.txt sitemap.xml assets admin dist/"
+  publish = "dist"
 
 # De /admin-login (api/auth.mjs) zet zelf zijn URL via `config.path`.
 [functions]
   directory = "api"
 
-# api/ zit binnen de publish-map, dus zonder deze regel staat de broncode van de
-# functies online. /api/auth zelf gaat naar de functie: functies komen vóór redirects.
+# Eén adres per pagina voor Google: de site draait op www.mariecure.be met nette
+# URL's, maar de .html-varianten en het netlify.app-adres gaven ook een 200.
 [[redirects]]
-  from = "/api/*"
-  to = "/api/auth"
+  from = "https://mariecure.netlify.app/*"
+  to = "https://www.mariecure.be/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/behandelingen.html"
+  to = "/behandelingen"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/fotos.html"
+  to = "/fotos"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/contact.html"
+  to = "/contact"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/bedankt.html"
+  to = "/bedankt"
   status = 301
   force = true
 

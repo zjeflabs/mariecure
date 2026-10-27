@@ -2,7 +2,7 @@
 
 Website voor **Mariecure**, een kleinschalige nagelstudio in Kalken (Laarne).
 
-Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen build-step, geen npm-dependencies. De site draait op Netlify. De login van `/admin` is een Netlify Function (`api/auth.mjs`) en werkt alleen daar.
+Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen bundler, geen npm-dependencies. De site draait op Netlify. De login van `/admin` is een Netlify Function (`api/auth.mjs`) en werkt alleen daar.
 
 ## Structuur
 
@@ -18,7 +18,7 @@ Statische multi-page site, gebouwd met enkel HTML/CSS/JS. Geen build-step, geen 
 │   └── config.yml
 ├── api/
 │   └── auth.mjs            Wachtwoord-login voor /admin (alleen op Netlify)
-├── netlify.toml            Netlify-config: functions-map, cache-headers
+├── netlify.toml            Netlify-config: build, functions-map, redirects, cache-headers
 ├── sitemap.xml
 ├── robots.txt
 └── assets/
@@ -74,7 +74,7 @@ Zegt de pagina dat het wachtwoord fout is, terwijl het klopt? Vaak staat er een 
 
 De live site is [https://www.mariecure.be](https://www.mariecure.be). Netlify hangt aan de GitHub-repo `zjeflabs/mariecure`, branch `main`.
 
-Een push naar `main` start een deploy. Er is geen build-commando. De instellingen staan in `netlify.toml`: publish-map `.` (de repo-root), functions-map `api`. Foto's publiceren vanuit `/admin` is ook een push naar `main`, dus dat deployt vanzelf.
+Een push naar `main` start een deploy. Het build-commando in `netlify.toml` kopieert enkel de websitebestanden naar `dist/` (de publish-map), zodat README, config en `api/` niet online staan. Voeg je een nieuw bestand toe in de root, zet het dan ook in dat commando. Functions-map: `api`. Foto's publiceren vanuit `/admin` is ook een push naar `main`, dus dat deployt vanzelf.
 
 De repo is privé. De website blijft publiek.
 

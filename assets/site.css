@@ -673,6 +673,15 @@ h3 {
   font-size: var(--fs-h2);
 }
 
+/* Zelfde look als de eyebrow-<p> die hier eerst stond: de h1 is er voor Google,
+   de klant wil geen zichtbare wijziging. */
+.section-title h1.eyebrow {
+  line-height: inherit;
+  margin-top: 18px;
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
 .section-title p {
   color: var(--muted);
   margin-top: 18px;
