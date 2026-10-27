@@ -12,10 +12,10 @@ Thumbs.db
 *.artifact.json
 
 # Secrets / lokale environment-variabelen — NOOIT committen
-# (CMS_PASSWORD en CMS_GITHUB_TOKEN horen enkel in Vercel thuis)
+# (CMS_PASSWORD en CMS_GITHUB_TOKEN horen enkel in Netlify thuis)
 .env
 .env.*
 !.env.example
 
-# Vercel CLI: 'vercel env pull' / 'vercel dev' schrijven hier secrets in
-.vercel
+# Netlify CLI: 'netlify link' / 'netlify dev' schrijven hier lokale state in
+.netlify

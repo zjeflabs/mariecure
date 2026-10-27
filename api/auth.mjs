@@ -2,52 +2,51 @@
 // Marieke heeft GEEN GitHub-account nodig: ze typt het master-wachtwoord en
 // deze functie geeft het CMS een GitHub-token dat enkel deze repo mag bewerken.
 //
-// Environment variables op Vercel (Production):
+// Environment variables op Netlify (Production):
 //   CMS_PASSWORD       het master-wachtwoord dat je aan Marieke doorstuurt
 //   CMS_GITHUB_TOKEN   fine-grained GitHub PAT, enkel repo "mariecure",
 //                      permissions: Contents = Read and write, Metadata = Read-only
 
-const crypto = require('crypto');
+import crypto from 'node:crypto';
 
-module.exports = async (req, res) => {
+// Sveltia opent `${base_url}/auth`, en base_url is `<domein>/api` (zie admin/index.html).
+export const config = { path: '/api/auth' };
+
+export default async (req) => {
   // .trim() vangt een per ongeluk meegekopieerde spatie of newline in de
-  // Vercel-waarde op (de meest voorkomende reden waarom het wachtwoord "fout" is).
+  // Netlify-waarde op (de meest voorkomende reden waarom het wachtwoord "fout" is).
   const password = (process.env.CMS_PASSWORD || '').trim();
   const token = (process.env.CMS_GITHUB_TOKEN || '').trim();
 
-  const html = (status, body) => {
-    res.statusCode = status;
-    res.setHeader('Content-Type', 'text/html; charset=utf-8');
-    res.setHeader('Cache-Control', 'no-store');
-    res.end(body);
-  };
+  const html = (status, body) =>
+    new Response(body, {
+      status,
+      headers: {
+        'Content-Type': 'text/html; charset=utf-8',
+        'Cache-Control': 'no-store',
+      },
+    });
 
   if (!password || !token) {
-    html(500, loginShell('<p class="err">De server mist <code>CMS_PASSWORD</code> of <code>CMS_GITHUB_TOKEN</code>. Stel deze in op Vercel.</p>'));
-    return;
+    return html(500, loginShell('<p class="err">De server mist <code>CMS_PASSWORD</code> of <code>CMS_GITHUB_TOKEN</code>. Stel deze in op Netlify.</p>'));
   }
 
   if (req.method === 'POST') {
-    const given = readPassword(req).trim();
+    const given = (await readPassword(req)).trim();
     if (safeEqual(given, password)) {
-      html(200, successPage(token));
-      return;
+      return html(200, successPage(token));
     }
     // Kleine vertraging maakt brute-force trager.
     await new Promise((r) => setTimeout(r, 600));
-    html(401, loginShell('<p class="err">Wachtwoord klopt niet. Probeer opnieuw.</p>'));
-    return;
+    return html(401, loginShell('<p class="err">Wachtwoord klopt niet. Probeer opnieuw.</p>'));
   }
 
-  html(200, loginShell(''));
+  return html(200, loginShell(''));
 };
 
-function readPassword(req) {
-  const b = req.body;
-  if (!b) return '';
-  if (Buffer.isBuffer(b)) return new URLSearchParams(b.toString('utf8')).get('password') || '';
-  if (typeof b === 'string') return new URLSearchParams(b).get('password') || '';
-  return b.password || '';
+async function readPassword(req) {
+  const body = await req.text();
+  return new URLSearchParams(body).get('password') || '';
 }
 
 // Constant-time vergelijking zodat de responstijd niets verraadt over het wachtwoord.

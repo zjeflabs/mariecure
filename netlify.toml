@@ -1,0 +1,47 @@
+# Statische site zonder build-step: de repo-root is meteen de website.
+[build]
+  publish = "."
+
+# De /admin-login (api/auth.mjs) zet zelf zijn URL via `config.path`.
+[functions]
+  directory = "api"
+
+# api/ zit binnen de publish-map, dus zonder deze regel staat de broncode van de
+# functies online. /api/auth zelf gaat naar de functie: functies komen vóór redirects.
+[[redirects]]
+  from = "/api/*"
+  to = "/api/auth"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/assets/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
+
+[[headers]]
+  for = "/robots.txt"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=3600"
